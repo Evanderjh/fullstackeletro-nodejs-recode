@@ -14,18 +14,19 @@ const CardComentario = () => {
     function registroDeComentario(event) {
         event.preventDefault();
 
-        let obj = {nome, msg};
-
-        obj.nome = event.target.nome.value;
-        obj.msg  = event.target.msg.value;
+        let nome = event.target.nome.value;
+        let msg  = event.target.msg.value;
     
         const url = "http://localhost:3333/comentarios";
 
-        console.log(obj);
-
         fetch(url,{
             method: "POST",
-            body: JSON.stringify(obj)
+            body: JSON.stringify({
+                nome, msg
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
         }).then((response) => response.json()).then((dados) => {
             setRender(!render);
             setValidar(dados);
